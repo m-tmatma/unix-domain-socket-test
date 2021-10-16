@@ -9,6 +9,9 @@ class Server:
         self.socket_path = socket_path
 
     def start(self):
+        if os.path.exists(self.socket_path):
+            os.remove(self.socket_path)
+
         s = self.socket = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
         s.bind(self.socket_path)
         s.listen(1)
